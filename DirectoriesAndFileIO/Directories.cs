@@ -12,7 +12,7 @@ namespace DirectoriesAndFileIO
         {
             string curdir = Directory.GetCurrentDirectory();
             
-            Assert.AreEqual(curdir, @".");
+            Assert.AreEqual(@".", curdir);
         }
 
         [TestMethod]
@@ -20,7 +20,7 @@ namespace DirectoriesAndFileIO
         {
             string[] files = Directory.GetFiles(Directory.GetCurrentDirectory());
 
-            Assert.AreEqual(files.Length, 10);
+            Assert.AreEqual(10, files.Length);
         }
     }
 }
