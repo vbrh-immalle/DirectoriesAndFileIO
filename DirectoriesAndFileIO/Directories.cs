@@ -10,16 +10,19 @@ namespace DirectoriesAndFileIO
         [TestInitialize]
         public void Initialize()
         {
-            // Create a test-directory with known files
-            //DirectoryInfo dir = Directory.CreateDirectory("testDir");
-
+            if (Directory.Exists("testDir"))
+            {
+                Directory.Delete("testDir", true); // remove test-directory (can throw exceptions! annoying!)
+            }
         }
 
         [TestCleanup]
         public void CleanUp()
         {
-            // remove test-directory (can throw exceptions! annoying!)
-            //Directory.Delete("testDir");
+            if (Directory.Exists("testDir"))
+            {
+                Directory.Delete("testDir", true); // remove test-directory (can throw exceptions! annoying!)
+            }
         }
 
         [TestMethod]
@@ -33,22 +36,6 @@ namespace DirectoriesAndFileIO
             dir.Refresh(); // only here we actually delete, otherwise use Directory.Delete("testDir");
 
             Assert.IsFalse(dir.Exists, "Directory should be deleted");
-        }
-
-        [TestMethod]
-        public void TestCreateDirectoryCreationTime()
-        {
-            DirectoryInfo dir = Directory.CreateDirectory("testDir");
-
-            DateTime now = DateTime.Now;
-            DateTime creationTime = dir.CreationTime;
-
-            Assert.IsTrue(dir.Exists, "Directory should exist");
-            Assert.AreEqual(now, creationTime);
-
-            dir.Delete();
-
-            Assert.IsFalse(dir.Exists, "Directory should be deleted");
-        }
+        }        
     }
 }
