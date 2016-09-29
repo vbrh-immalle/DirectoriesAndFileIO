@@ -35,5 +35,32 @@ Voeg aan `TestReadFiles` een nieuwe test toe die handelt over `File.OpenText`.
 - noem de test `TestFileOpenText`
 - test enkele nuttige dingen
 
+# Opdracht 2 : TestReadFiles verbeteren
 
+Momenteel gebruikt `TestReadFiles` de `fileB` nog niet echt nuttig.
+
+Maak van `fileBContents` multi-line contents (met `\n` in) en zorg dat deze 2
+tests ook `fileB` gebruiken om extra tests uit te voeren:
+
+- `TestReadAllText`
+- `TestReadAllLines`
+
+
+# Opdracht 3 : TestWriteFiles
+
+Voeg een nieuwe file `TestWriteFiles.cs` toe aan het UnitTest-project.
+
+Ga hierin op gelijkaardige manier te werk als bij `TestReadFiles` maar ditmaal
+om verschillende manieren te demonstreren om bestanden **weg te schrijven**.
+
+Gebruik zeker :
+
+- `Initialize` en `CleanUp`
+- een test voor `WriteAllText`
+- een test voor `WriteAllLines`
+- een test voor `StreamWriter`
+- eventueel een test voor `File.OpenWrite`
+
+Maak voor elke van voorgaande tests ook een variant die **Append** doet i.p.v.
+**Replace**.
 
