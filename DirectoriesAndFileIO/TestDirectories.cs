@@ -5,7 +5,7 @@ using System.IO;
 namespace DirectoriesAndFileIO
 {
     [TestClass]
-    public class Directories
+    public class TestDirectories
     {
         [TestInitialize]
         public void Initialize()

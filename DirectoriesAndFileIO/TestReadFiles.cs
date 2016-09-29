@@ -5,7 +5,7 @@ using System.IO;
 namespace DirectoriesAndFileIO
 {
     [TestClass]
-    public class Files
+    public class TestReadFiles
     {
         string testDir = "";
         string fileA = "";

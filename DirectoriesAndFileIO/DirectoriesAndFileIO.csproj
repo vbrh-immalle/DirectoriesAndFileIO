@@ -52,8 +52,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Directories.cs" />
-    <Compile Include="Files.cs" />
+    <Compile Include="TestDirectories.cs" />
+    <Compile Include="TestReadFiles.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Choose>
