@@ -7,41 +7,48 @@ namespace DirectoriesAndFileIO
     [TestClass]
     public class Directories
     {
-        
-        [TestMethod]
-        // bad test : hard to reproduce
-        public void TestGetCurrentDirectory()
+        [TestInitialize]
+        public void Initialize()
         {
-            string curdir = Directory.GetCurrentDirectory();
+            // Create a test-directory with known files
+            //DirectoryInfo dir = Directory.CreateDirectory("testDir");
 
-            Assert.AreEqual(@".", curdir);
+        }
+
+        [TestCleanup]
+        public void CleanUp()
+        {
+            // remove test-directory (can throw exceptions! annoying!)
+            //Directory.Delete("testDir");
         }
 
         [TestMethod]
-        public void TestGetFiles()
+        public void TestCreateAndDeleteDirectory()
         {
-            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory());
+            DirectoryInfo dir = Directory.CreateDirectory("testDir");
 
-            Assert.AreEqual(10, files.Length);
-            // TODO
+            Assert.IsTrue(dir.Exists, "Directory should exist");
+
+            dir.Delete();
+            dir.Refresh(); // only here we actually delete, otherwise use Directory.Delete("testDir");
+
+            Assert.IsFalse(dir.Exists, "Directory should be deleted");
         }
 
         [TestMethod]
-        public void TestGetFilesWithSearchPattern()
+        public void TestCreateDirectoryCreationTime()
         {
-            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "*.exe");
+            DirectoryInfo dir = Directory.CreateDirectory("testDir");
 
-            Assert.AreEqual(10, files.Length);
-            // TODO
+            DateTime now = DateTime.Now;
+            DateTime creationTime = dir.CreationTime;
+
+            Assert.IsTrue(dir.Exists, "Directory should exist");
+            Assert.AreEqual(now, creationTime);
+
+            dir.Delete();
+
+            Assert.IsFalse(dir.Exists, "Directory should be deleted");
         }
-
-        [TestMethod]
-        public void TestGetFilesInSubdirectories()
-        {
-            string[] files = Directory.GetFiles(Directory.GetCurrentDirectory(), "", SearchOption.AllDirectories);
-
-            Assert.AreEqual(10, files.Length);
-        }
-        
     }
 }
