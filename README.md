@@ -26,3 +26,14 @@ i.v.m. duidelijkheid/geschiedenis van de code:
 - Wat doet commit 9b3e4065? Maakt dit de code makkelijker leesbaar? Makkelijker uitbreidbaar?
 
 
+# Opdracht 1 : FileOpenText
+
+Voeg aan `TestReadFiles` een nieuwe test toe die handelt over `File.OpenText`.
+
+- zie https://msdn.microsoft.com/en-us/library/system.io.file.opentext%28v=vs.110%29.aspx
+- zet de test na `TestReadAllLines`
+- noem de test `TestFileOpenText`
+- test enkele nuttige dingen
+
+
+
