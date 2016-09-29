@@ -7,48 +7,66 @@ namespace DirectoriesAndFileIO
     [TestClass]
     public class Files
     {
+        string testDir = "";
+        string fileA = "";
+        string fileAContents = "";
+        string fileB = "";
+        string fileBContents = "";
+        string subDir = "";
+        string subDirFile = "";
+        string subDirFileContents = "";
+
         [TestInitialize]
         public void Initialize()
         {
             // Create a test-directory with known files and directories
-            Directory.CreateDirectory("testDir");
-            File.WriteAllText(@"testDir\a.txt", "This is a.txt.");
-            File.WriteAllText(@"testDir\b.txt", "This is b.txt.");
-            Directory.CreateDirectory(@"testDir\subDir");
+            testDir = "testDir";
+            fileA = Path.Combine(testDir, "a.txt");
+            fileB = Path.Combine(testDir, "b.txt");
+            subDir = Path.Combine(testDir, "subDir");
+            subDirFile = Path.Combine(subDir, subDirFile);
+            fileAContents = "This is a.txt.";
+            fileBContents = "This is b.txt.";
+            subDirFileContents = "This is a file in a sub-directory.";
+
+            Directory.CreateDirectory(testDir);
+            File.WriteAllText(fileA, fileAContents);
+            File.WriteAllText(fileB, fileBContents);
+            Directory.CreateDirectory(subDir);
         }
 
         [TestCleanup]
         public void CleanUp()
         {
-            if (Directory.Exists("testDir"))
+            if (Directory.Exists(testDir))
             {
-                Directory.Delete("testDir", true); // remove test-directory (can throw exceptions! annoying!)
+                Directory.Delete(testDir, true);
             }
         }
 
         [TestMethod]
         public void TestFileReadAllText()
         {
-            string txt = File.ReadAllText(@"testDir\a.txt");
-            Assert.AreEqual("This is a.txt.", txt);
+            string txt = File.ReadAllText(fileA);
+            Assert.AreEqual(fileAContents, txt);
         }
 
         [TestMethod]
         public void TestReadAllLines()
         {
-            string[] lines = File.ReadAllLines(@"testDir\a.txt");
+            string[] lines = File.ReadAllLines(fileA);
 
             Assert.AreEqual(1, lines.Length);
-            Assert.AreEqual("This is a.txt.", lines[0]);
+            Assert.AreEqual(fileAContents, lines[0]);
         }
 
         [TestMethod]
         public void TestStreamReader()
         {
-            StreamReader s = new StreamReader(@"testDir\a.txt");
+            StreamReader s = new StreamReader(fileA);
 
             string txt = s.ReadToEnd();
-            Assert.AreEqual("This is a.txt.", txt);
+            Assert.AreEqual(fileAContents, txt);
 
             s.Close();
         }
@@ -58,7 +76,7 @@ namespace DirectoriesAndFileIO
         {
             byte[] data = new byte[20];
 
-            FileStream stream = File.OpenRead(@"testDir\a.txt");
+            FileStream stream = File.OpenRead(fileA);
             int r = stream.Read(data, 0, 20);
 
             string txt = "";
@@ -70,8 +88,8 @@ namespace DirectoriesAndFileIO
                 }
             }
 
-            Assert.AreEqual(14, r);
-            Assert.AreEqual("This is a.txt.", txt);
+            Assert.AreEqual(fileAContents.Length, r);
+            Assert.AreEqual(fileAContents, txt);
 
             stream.Close();
         }
