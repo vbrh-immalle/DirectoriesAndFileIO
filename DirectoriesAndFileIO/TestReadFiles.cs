@@ -40,7 +40,7 @@ namespace DirectoriesAndFileIO
         {
             if (Directory.Exists(testDir))
             {
-                Directory.Delete(testDir, true);
+                Directory.Delete(testDir, recursive: true);
             }
         }
 
